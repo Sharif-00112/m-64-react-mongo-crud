@@ -13,13 +13,13 @@ const UpdateUser = () => {
     } ,[id]);
 
     const handleNameChange = e => {
-        const updatedName = e.target.value;
-        const updatedUser = {name: updatedName, email: user.email};
-        setUser(updatedUser);
+        e.preventDefault();
+
     }
 
     const handleEmailChange = e => {
-        console.log(e.target.value);
+        e.preventDefault();
+
     }
 
     const handleUpdateUser = e => {

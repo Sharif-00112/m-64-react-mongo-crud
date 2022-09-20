@@ -1,7 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const { response } = require('express');
 const ObjectId = require('mongodb').ObjectId;
 
 const app = express();
@@ -14,7 +12,8 @@ const port = 3001;
 app.use(cors());
 app.use(express.json());
 
-
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const { response } = require('express');
 //Use user and password here
 const uri = "mongodb+srv://mydbuser1:yzBcyY0VW78LHcRW@cluster0.x5tdtyb.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
@@ -33,11 +32,11 @@ async function run() {
       res.send(users);
     });
 
-    //GET API (get single user by id)
+    //GET API (single user by id)
     app.get('/users/:id', async (req, res) =>{
       const id = req.params.id;
       const query = {_id: ObjectId(id)};
-      const user = await userCollection.findOne(query);
+      const user = userCollection.findOne(query);
       console.log('load user with id : ', id);
       res.send(user);
     })

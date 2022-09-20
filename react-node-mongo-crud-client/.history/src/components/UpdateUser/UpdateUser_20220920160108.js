@@ -13,9 +13,7 @@ const UpdateUser = () => {
     } ,[id]);
 
     const handleNameChange = e => {
-        const updatedName = e.target.value;
-        const updatedUser = {name: updatedName, email: user.email};
-        setUser(updatedUser);
+        console.log(e.target.value);
     }
 
     const handleEmailChange = e => {

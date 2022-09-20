@@ -8,7 +8,7 @@ const Users = () => {
         fetch('http://localhost:3001/users')
         .then(res => res.json())
         .then(data => setUsers(data))
-    }, [])
+    }, [users])
 
     //DELETE an user
     const handleDeleteUser = id =>{
@@ -24,8 +24,8 @@ const Users = () => {
                     alert('Deleted Successfully!')
 
                     // update the UI (i've set dependency instead of it)
-                    const remainingUsers = users.filter(user => user._id !== id);
-                    setUsers(remainingUsers);
+                    // const remainingUsers = users.filter(user => user._id !== id);
+                    // setUsers(remainingUsers);
                 }
             })
         }
@@ -39,10 +39,8 @@ const Users = () => {
                 {
                     users.map(user => <li key={user._id}>
                         {user.name} :: {user.email}
-
                         <button onClick={() => handleDeleteUser(user._id)}>X</button>
-
-                        <Link to={`/users/update/${user._id}`}><button>Update</button></Link>
+                        <Link to={`/users/update/:id`}><button>Update</button></Link>
                     </li>)
                 }
             </ul>

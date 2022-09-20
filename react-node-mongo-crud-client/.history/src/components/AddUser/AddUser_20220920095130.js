@@ -4,7 +4,7 @@ const AddUser = () => {
     const nameRef = useRef();
     const emailRef = useRef();
 
-    const handleAddUser = e =>{ 
+    const handleAddUser = e =>{
         e.preventDefault();
         const name = nameRef.current.value;
         const email = emailRef.current.value;
