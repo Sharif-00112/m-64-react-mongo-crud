@@ -12,24 +12,44 @@ const UpdateUser = () => {
         .then(data => setUser(data))
     } ,[id]);
 
+    // UPDATE user
     const handleNameChange = e => {
+        // updating Name using option-1
         const updatedName = e.target.value;
         const updatedUser = {name: updatedName, email: user.email};
         setUser(updatedUser);
     }
 
     const handleEmailChange = e => {
-        console.log(e.target.value);
+        // updating Email using option-2
+        const updatedEmail = e.target.value;
+        const updatedUser = {...user};
+        updatedUser.email = updatedEmail;
+        setUser(updatedUser);
     }
 
     const handleUpdateUser = e => {
         e.preventDefault();
-
+        const url = `http://localhost:3001/users/${id}`;
+        fetch (url, {
+            method: 'PUT',
+            headers: {
+                'content-type' : 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.modifiedCount > 0){
+                alert('Updated Successfully!')
+                setUser({});
+            }
+        })
     }
 
     return (
         <div>
-            <h2>Update User: {user.name}</h2> 
+            <h2>Update User: {user.name}, {user.email}</h2> 
             <p>ID: <small>{id}</small></p>
             <form onSubmit={handleUpdateUser}>
                 <input type="text" value={user.name || ''} onChange={handleNameChange}/>
